@@ -1,0 +1,41 @@
+[package]
+name = "starknet_multicall"
+version = "0.1.0"
+cairo-version = "2.6.4"
+authors = ["Huynh Duc Duy <@huynhducduy>"]
+license = "MIT"
+keywords = ["starknet", "smart-contract", "cairo"]
+description = "True multicall on starknet"
+documentation = "https://huynhducduy.github.io/starknet_multicall/"
+homepage = "https://huynhducduy.github.io/starknet_multicall/"
+repository = "https://github.com/huynhducduy/starknet_multicall"
+readme = "README.md"
+experimental-features = ["negative_impls"]
+
+[scripts]
+test = "snforge test"
+declare-sepolia = "sncast --profile sepolia declare --contract-name Multicall"
+declare-mainnet = "sncast --profile mainnet declare --contract-name Multicall"
+deploy-sepolia = "sncast --profile sepolia deploy --class-hash 0xaad87da113e1ef25005a52c721610618683010d16e38a76c4cdb692d076827"
+deploy-mainnet = "sncast --profile mainnet deploy --class-hash 0xaad87da113e1ef25005a52c721610618683010d16e38a76c4cdb692d076827"
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+allowed-libfuncs-list.name = "experimental"
+
+[cairo]
+sierra-replace-ids = true
+
+[dependencies]
+starknet = ">=2.6.4"
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.26.0" }
+
+
+[tool.snforge]
+exit_first = false
+
+[tool.fmt]
+sort-module-level-items = false
+tab-size = 4 # Obey .editorconfig
+max-line-length = 120
