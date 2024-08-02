@@ -1,3 +1,4 @@
 target
 .snfoundry_cache
 snfoundry.toml
+node_modules
