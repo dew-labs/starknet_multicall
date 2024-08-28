@@ -1,6 +1,6 @@
 {
   "name": "starknet_multicall",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
   "sideEffects": false,
   "moduleSideEffects": false,
