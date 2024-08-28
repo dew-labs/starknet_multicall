@@ -1,5 +1,27 @@
 # Multicall on Starknet
 
+Cairo multicall contract on starknet with typescript (100% typesafe) utility.
+
+## Install
+
+```sh
+pnpm add starknet_multicall
+pnpm add -D typescript abi-wan-kanabi
+```
+## Use
+
+```ts
+import {createMulticallRequest, multicall} from 'starknet_multicall'
+
+const calls = [
+  createMulticallRequest('<contract address>', <ABI>, '<method_name>', [<method_arg1>, <method_arg2>]),
+]
+
+const [result1] = await multicall(calls, <multicall contract address>, <providerOrAccount>)
+```
+
+Find deployed `<multicall contract address>` in the last section.
+
 ## Development
 
 Requirements: (Recommended to install via `asdf`)
