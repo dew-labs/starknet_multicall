@@ -2,3 +2,11 @@ target
 .snfoundry_cache
 snfoundry.toml
 node_modules
+dist
+.idea
+.DS_Store
+
+tsconfig.tsbuildinfo
+.eslintcache
+coverage
+vitest.config.ts.timestamp*
