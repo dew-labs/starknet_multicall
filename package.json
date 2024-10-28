@@ -1,12 +1,16 @@
 {
   "name": "starknet_multicall",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "sideEffects": false,
   "moduleSideEffects": false,
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dew-labs/starknet_multicall"
+  },
   "exports": {
     ".": {
       "import": {

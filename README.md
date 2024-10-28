@@ -2,12 +2,15 @@
 
 Cairo multicall contract on starknet with typescript (100% typesafe) utility.
 
+# NPM Package
+
 ## Install
 
 ```sh
 pnpm add starknet_multicall
 pnpm add -D typescript abi-wan-kanabi
 ```
+
 ## Use
 
 ```ts
@@ -24,18 +27,58 @@ Find deployed `<multicall contract address>` in the last section.
 
 ## Development
 
-Requirements: (Recommended to install via `mise`)
+Requirements:
+-   mise
 
--   Scarb 2.8.4 (on cairo 2.8.4)
--   Starknet Foundry 0.32.0
+## Install dependencies
+
+```sh
+mise install
+pnpm install
+```
+
+### Test
+
+```sh
+pnpm test
+```
+
+### Build
+
+```sh
+pnpm build
+```
+
+### Publish new version
+
+```sh
+pnpm publish
+```
+
+# Contracts
+
+## Development
+
+Requirements:
+-   mise
+
+## Install dependencies
+
+```sh
+mise install
+```
 
 ## Test
 
-`scarb test`
+```sh
+scarb test
+```
 
 ## Build
 
-`scarb build`
+```sh
+scarb build
+```
 
 ## Declare & deploy
 
