@@ -30,7 +30,7 @@ export function createMulticallRequest<
   abi: ContractAbi
   contractAddress: string
   entrypoint: Method
-  calldata: Args
+  calldata: bigint[]
 } {
   const contract = new Contract(abi, address)
   const call = contract.populate(method, args as RawArgs)
@@ -39,22 +39,26 @@ export function createMulticallRequest<
     abi: abi,
     contractAddress: call.contractAddress,
     entrypoint: method,
-    calldata: call.calldata as Args,
+    calldata: call.calldata as bigint[],
   }
 }
 
-interface CallAndAbi {
+export interface CallAndAbi {
   abi: Abi
   contractAddress: string
   entrypoint: string
-  calldata: unknown
+  calldata: bigint[]
 }
+
+export type MulticallResult<T extends CallAndAbi, Ts extends T[]> = Promise<{
+  [k in keyof Ts]: FunctionRet<Ts[k]['abi'], Ts[k]['entrypoint']>
+}>
 
 export async function multicall<T extends CallAndAbi, Ts extends T[]>(
   calls: Ts,
   multicallAddress: string,
   providerOrAccount: ProviderInterface | AccountInterface,
-): Promise<{[k in keyof Ts]: FunctionRet<Ts[k]['abi'], Ts[k]['entrypoint']>}> {
+): MulticallResult<T, Ts> {
   const multicallContract = new Contract(MulticallABI, multicallAddress, providerOrAccount).typedv2(
     MulticallABI,
   )
@@ -64,7 +68,7 @@ export async function multicall<T extends CallAndAbi, Ts extends T[]>(
       return {
         to: call.contractAddress,
         selector: hash.getSelectorFromName(call.entrypoint),
-        calldata: call.calldata as bigint[],
+        calldata: call.calldata,
       }
     }),
   )
