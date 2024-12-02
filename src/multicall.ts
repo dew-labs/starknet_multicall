@@ -15,12 +15,18 @@ import {
 
 import MulticallABI from '../artifacts/MulticallABI'
 
+export type ContractMethodArgs<
+  ContractAbi extends Abi,
+  Method extends ExtractAbiFunctionNames<ContractAbi>,
+> =
+  FunctionArgs<ContractAbi, Method> extends unknown[] // note: we have to do this because some how FunctionArgs is wrong for single element
+    ? FunctionArgs<ContractAbi, Method>
+    : [FunctionArgs<ContractAbi, Method>]
+
 export function createMulticallRequest<
   ContractAbi extends Abi,
   Method extends ExtractAbiFunctionNames<ContractAbi>,
-  Args extends FunctionArgs<ContractAbi, Method> extends unknown[] // note: we have to do this because some how FunctionArgs is wrong for single element
-    ? FunctionArgs<ContractAbi, Method>
-    : [FunctionArgs<ContractAbi, Method>],
+  Args extends ContractMethodArgs<ContractAbi, Method>,
 >(
   address: string,
   abi: ContractAbi,
