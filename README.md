@@ -18,7 +18,7 @@ import {createMulticallRequest, multicall} from 'starknet_multicall'
 
 const calls = [
   createMulticallRequest('<contract address>', <ABI>, '<method_name>', [<method_arg1>, <method_arg2>]),
-]
+] as const
 
 const [result1] = await multicall(calls, <multicall contract address>, <providerOrAccount>)
 ```

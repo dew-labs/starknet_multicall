@@ -12,6 +12,7 @@ import {
   type ProviderInterface,
   type RawArgs,
 } from 'starknet'
+import invariant from 'tiny-invariant'
 
 import MulticallABI from '../artifacts/MulticallABI'
 
@@ -26,12 +27,11 @@ export type ContractMethodArgs<
 export function createMulticallRequest<
   ContractAbi extends Abi,
   Method extends ExtractAbiFunctionNames<ContractAbi>,
-  Args extends ContractMethodArgs<ContractAbi, Method>,
 >(
   address: string,
   abi: ContractAbi,
   method: Method,
-  args?: Args,
+  args?: ContractMethodArgs<ContractAbi, Method>,
 ): {
   abi: ContractAbi
   contractAddress: string
@@ -56,11 +56,11 @@ export interface CallAndAbi {
   calldata: bigint[]
 }
 
-export type MulticallResult<T extends CallAndAbi, Ts extends T[]> = Promise<{
+export type MulticallResult<T extends CallAndAbi, Ts extends readonly T[]> = Promise<{
   [k in keyof Ts]: FunctionRet<Ts[k]['abi'], Ts[k]['entrypoint']>
 }>
 
-export async function multicall<T extends CallAndAbi, Ts extends T[]>(
+export async function multicall<T extends CallAndAbi, Ts extends readonly T[]>(
   calls: Ts,
   multicallAddress: string,
   providerOrAccount: ProviderInterface | AccountInterface,
@@ -79,12 +79,15 @@ export async function multicall<T extends CallAndAbi, Ts extends T[]>(
     }),
   )
 
+  const result = results[1]
+  invariant(Array.isArray(result), 'Multicall failed, response is not an array')
+
   // @ts-expect-error -- too complex
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call -- its safe
-  return results[1].map((result, index) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unsafe-member-access -- guranteed
-    const callData = new CallData(calls[index]!.abi)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unsafe-member-access -- guranteed
-    return callData.parse(calls[index]!.entrypoint, result as unknown as string[])
+  return result.map((result, index) => {
+    const call = calls[index]
+    invariant(call, 'Multicall failed, call is undefined')
+
+    const callData = new CallData(call.abi)
+    return callData.parse(call.entrypoint, result as string[])
   })
 }

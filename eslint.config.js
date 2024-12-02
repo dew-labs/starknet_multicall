@@ -21,7 +21,7 @@ import pluginPromise from "eslint-plugin-promise";
 import * as pluginRegexp from "eslint-plugin-regexp";
 import pluginSecurity from "eslint-plugin-security";
 import pluginSimpleImportSort from "eslint-plugin-simple-import-sort";
-import pluginSonarjs from "eslint-plugin-sonarjs";
+// import pluginSonarjs from "eslint-plugin-sonarjs";
 import pluginVitest from "eslint-plugin-vitest";
 import globals from "globals";
 // eslint-disable-next-line import-x/no-unresolved -- import-x error
@@ -79,67 +79,67 @@ const applyToVitest = createApplyTo(
 //------------------------------------------------------------------------------
 
 const coreConfigs = [
-  ...applyToAll("core/eslint-recommended", eslint.configs.recommended),
-  ...applyToAll("core/security", pluginSecurity.configs.recommended),
-  ...applyToAll("core/promise", pluginPromise.configs["flat/recommended"]),
-  ...applyToAll("core/import-x", ...compat.config(pluginImportX.configs.recommended)),
-  ...applyToAll("core/no-use-extend-native", pluginNoUseExtendNative.configs.recommended),
-  ...applyToAll("core/eslint-comments", {
+  ...applyToAll('core/eslint-recommended', eslint.configs.recommended),
+  ...applyToAll('core/security', pluginSecurity.configs.recommended),
+  ...applyToAll('core/promise', pluginPromise.configs['flat/recommended']),
+  ...applyToAll('core/import-x', ...compat.config(pluginImportX.configs.recommended)),
+  ...applyToAll('core/no-use-extend-native', pluginNoUseExtendNative.configs.recommended),
+  ...applyToAll('core/eslint-comments', {
     ...pluginEslintComments.configs.recommended,
     // workaround for https://github.com/eslint-community/eslint-plugin-eslint-comments/issues/215
     plugins: {
-      "@eslint-community/eslint-comments": pluginEslintComments,
+      '@eslint-community/eslint-comments': pluginEslintComments,
     },
   }),
-  ...applyToAll("core/regexp", pluginRegexp.configs["flat/recommended"]),
+  ...applyToAll('core/regexp', pluginRegexp.configs['flat/recommended']),
 
-  ...applyToAll("core/depend", pluginDepend.configs["flat/recommended"]),
-  ...applyToAll("core/sonarjs", pluginSonarjs.configs.recommended), // drop this if using SonarQube or SonarCloud in favor of the IDE extension
-  ...applyToAll("core/no-relative-import-paths", {
+  ...applyToAll('core/depend', pluginDepend.configs['flat/recommended']),
+  // ...applyToAll("core/sonarjs", pluginSonarjs.configs.recommended), // drop this if using SonarQube or SonarCloud in favor of the IDE extension
+  ...applyToAll('core/no-relative-import-paths', {
     plugins: {
-      "no-relative-import-paths": pluginNoRelativeImportPaths,
+      'no-relative-import-paths': pluginNoRelativeImportPaths,
     },
     rules: {
-      "no-relative-import-paths/no-relative-import-paths": [
-        "warn",
-        { allowSameFolder: true, rootDir: "src", prefix: "@" },
+      'no-relative-import-paths/no-relative-import-paths': [
+        'warn',
+        {allowSameFolder: true, rootDir: 'src', prefix: '@'},
       ],
     },
   }),
-  ...applyToAll("core/simple-import-sort", {
+  ...applyToAll('core/simple-import-sort', {
     plugins: {
-      "simple-import-sort": pluginSimpleImportSort,
+      'simple-import-sort': pluginSimpleImportSort,
     },
     rules: {
-      "sort-imports": "off",
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
+      'sort-imports': 'off',
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
     },
   }),
-  ...applyToAll("core/no-barrel-files", {
+  ...applyToAll('core/no-barrel-files', {
     plugins: {
-      "no-barrel-files": pluginNoBarrelFiles, // switch to eslint-plugin-barrel-files?
+      'no-barrel-files': pluginNoBarrelFiles, // switch to eslint-plugin-barrel-files?
     },
     rules: {
-      "no-barrel-files/no-barrel-files": "error",
+      'no-barrel-files/no-barrel-files': 'error',
     },
   }),
-  ...applyToAll("core/no-secrets", {
+  ...applyToAll('core/no-secrets', {
     plugins: {
-      "no-secrets": pluginNoSecrets,
+      'no-secrets': pluginNoSecrets,
     },
     rules: {
-      "no-secrets/no-secrets": [
-        "error",
+      'no-secrets/no-secrets': [
+        'error',
         {
           tolerance: 4.5,
         },
       ],
     },
   }),
-  ...applyToAll("core/exception-handling", {
+  ...applyToAll('core/exception-handling', {
     plugins: {
-      "exception-handling": pluginExceptionHandling,
+      'exception-handling': pluginExceptionHandling,
     },
     rules: {
       // 'exception-handling/no-unhandled': 'error',
@@ -148,7 +148,7 @@ const coreConfigs = [
   // 'plugin:jsdoc/recommended-typescript', // TODO: To be added later
   // 'plugin:unicorn/recommended', // TODO: To be added later
   // 'plugin:isaacscript/recommended' // TODO: To be added later
-];
+]
 
 const jsonConfigs = [
   ...applyToJson("json/json", pluginJsonc.configs["flat/recommended-with-json"]),
@@ -262,20 +262,20 @@ const testConfigs = [
 const config = tsEslint.config(
   pluginGitignore({
     root: true,
-    files: [".gitignore"],
+    files: ['.gitignore'],
     strict: false,
   }),
   {
-    ignores: ["public/*", "**/*.gen.ts", "vitest.config.ts.timestamp*", "src/abis/**/*"],
+    ignores: ['public/*', '**/*.gen.ts', 'vitest.config.ts.timestamp*', 'src/abis/**/*'],
   },
   ...coreConfigs,
   ...jsonConfigs,
   ...typescriptConfigs,
   ...testConfigs,
-  ...applyToAll("core", {
+  ...applyToAll('core', {
     languageOptions: {
-      sourceType: "module",
-      ecmaVersion: "latest",
+      sourceType: 'module',
+      ecmaVersion: 'latest',
       parserOptions: {
         ecmaFeatures: {
           impliedStrict: true,
@@ -291,9 +291,9 @@ const config = tsEslint.config(
       },
     },
     rules: {
-      "import-x/no-unresolved": "error",
-      "import-x/order": "off",
-      "import-x/namespace": "off",
+      'import-x/no-unresolved': 'error',
+      'import-x/order': 'off',
+      'import-x/namespace': 'off',
       // 'unicorn/better-regex': 'warn',
       // 'unicorn/filename-case': [
       //   'error',
@@ -304,21 +304,21 @@ const config = tsEslint.config(
       //     }
       //   }
       // ],
-      "@eslint-community/eslint-comments/require-description": [
-        "error",
-        { ignore: ["eslint-enable"] },
+      '@eslint-community/eslint-comments/require-description': [
+        'error',
+        {ignore: ['eslint-enable']},
       ],
-      "sonarjs/no-duplicate-string": "warn",
-      "promise/always-return": ["warn", { ignoreLastCallback: true }],
-      "promise/no-callback-in-promise": [
-        "warn",
+      // "sonarjs/no-duplicate-string": "warn",
+      'promise/always-return': ['warn', {ignoreLastCallback: true}],
+      'promise/no-callback-in-promise': [
+        'warn',
         {
-          exceptions: ["process.nextTick", "setImmediate", "setTimeout"],
+          exceptions: ['process.nextTick', 'setImmediate', 'setTimeout'],
         },
       ],
     },
   }),
-  ...applyToAll("prettier", pluginPrettierRecommended) // Always the last
-);
+  ...applyToAll('prettier', pluginPrettierRecommended), // Always the last
+)
 
 export default config;
