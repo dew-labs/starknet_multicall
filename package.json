@@ -43,7 +43,7 @@
     "generate": "pnpm run --parallel --aggregate-output --reporter-hide-prefix '/^generate:(.+)$/'",
     "prebuild": "pnpm run generate",
     "build": "tsup",
-    "prepublishOnly": "pnpm run build --no-sourcemap --minify"
+    "prepublishOnly": "pnpm run build --no-sourcemap --minify --no-metafile"
   },
   "packageManager": "pnpm@9.14.4",
   "dependencies": {
