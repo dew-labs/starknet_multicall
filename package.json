@@ -1,6 +1,6 @@
 {
   "name": "starknet_multicall",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "sideEffects": false,
   "moduleSideEffects": false,
@@ -47,12 +47,11 @@
   },
   "packageManager": "pnpm@9.14.4",
   "dependencies": {
-    "abi-wan-kanabi": "^2.2.3",
-    "starknet": "^6.20.3",
     "tiny-invariant": "^1.3.3"
   },
   "peerDependencies": {
-    "abi-wan-kanabi": "^2.2.3"
+    "abi-wan-kanabi": "2.2.2",
+    "starknet": "^6.20.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",

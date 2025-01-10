@@ -7,8 +7,8 @@ Cairo multicall contract on starknet with typescript (100% typesafe) utility.
 ## Install
 
 ```sh
-pnpm add starknet_multicall
 pnpm add -D typescript abi-wan-kanabi
+pnpm add starknet_multicall
 ```
 
 ## Use
