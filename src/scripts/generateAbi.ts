@@ -3,7 +3,7 @@ import {readFileSync, writeFileSync} from 'node:fs'
 import {json, type SierraContractClass} from 'starknet'
 
 const CONTRACTS = [
-  ['Multicall', './target/dev/starknet_multicall_Multicall.contract_class.json'],
+  ['Multicall', './target/release/starknet_multicall_Multicall.contract_class.json'],
 ] as const
 
 function getAbis() {

@@ -28,7 +28,8 @@ Find deployed `<multicall contract address>` in the last section.
 ## Development
 
 Requirements:
--   mise
+
+- mise
 
 ## Install dependencies
 
@@ -60,7 +61,8 @@ pnpm publish
 ## Development
 
 Requirements:
--   mise
+
+- mise
 
 ## Install dependencies
 
@@ -77,7 +79,7 @@ scarb test
 ## Build
 
 ```sh
-scarb build
+scarb --release build
 ```
 
 ## Declare & deploy
@@ -85,19 +87,25 @@ scarb build
 Using `sncast`: Prepare `snfoundry.toml` based on `snfoundry.toml.example`
 
 Sepolia:
+
 ```sh
-starkli declare ./target/dev/starknet_multicall_Multicall.contract_class.json --compiler-version=2.8.2 --network=sepolia
+starkli declare ./target/release/starknet_multicall_Multicall.contract_class.json --compiler-version=2.11.4 --network=sepolia
 starkli deploy <CLASS_HASH> --network=sepolia
 ```
 
 Mainnet:
+
 ```sh
-starkli declare ./target/dev/starknet_multicall_Multicall.contract_class.json --compiler-version=2.8.2 --network=mainnet
+starkli declare ./target/release/starknet_multicall_Multicall.contract_class.json --compiler-version=2.11.4 --network=mainnet
 starkli deploy <CLASS_HASH> --network=mainnet
 ```
 
 ## Deployed contract
 
-Sepolia: `0x00d3d1c15729a0ce7234adb4bee69b36db08553ce11440e2c48553b2c409f7eb`
+Sepolia Class Hash: `0x0552f2f9422c58f182ca33f0da421018e577179dbd13e1b683e12f1fffe4871e`
 
-Mainnet: `0x620d16d511f5732fffc6ac780352619396f42f43ee3124af4123db199f0be2e`
+Sepolia Contract Address: `0x066be29f7ddf044ebe2401d5174ab5aed9aec0a672858cc7ec66d5e4ed49191b`
+
+Sepolia Class Hash: ``
+
+Mainnet Contract Address: `0x620d16d511f5732fffc6ac780352619396f42f43ee3124af4123db199f0be2e`

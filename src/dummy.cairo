@@ -12,7 +12,7 @@ trait IDummy<TContractState> {
 
 #[starknet::contract]
 mod Dummy {
-    use starknet::{get_caller_address, ContractAddress};
+    use starknet::{ContractAddress, get_caller_address};
 
     #[storage]
     struct Storage {

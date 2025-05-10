@@ -1,4 +1,5 @@
-// From https://github.com/argentlabs/argent-contracts-starknet/blob/556313fdfe4cb6512c277be1a2dc9bedc812b81d/src/utils/multicall.cairo
+// From
+// https://github.com/argentlabs/argent-contracts-starknet/blob/556313fdfe4cb6512c277be1a2dc9bedc812b81d/src/utils/multicall.cairo
 use starknet::account::Call;
 
 #[starknet::interface]
@@ -8,7 +9,9 @@ trait IMulticall<TContractState> {
 
 #[starknet::contract]
 mod Multicall {
-    use starknet::{call_contract_syscall, info::get_block_number, account::Call};
+    use starknet::info::get_block_number;
+    use starknet::account::Call;
+    use starknet::call_contract_syscall;
 
     fn execute_multicall(mut calls: Span<Call>) -> Array<Span<felt252>> {
         let mut result: Array<Span<felt252>> = array![];
@@ -29,7 +32,7 @@ mod Multicall {
                                     Option::Some(item) => data.append(item),
                                     Option::None => { break; },
                                 }
-                            };
+                            }
 
                             panic(data);
                         },
@@ -37,7 +40,7 @@ mod Multicall {
                 },
                 Option::None => { break; },
             }
-        };
+        }
         result
     }
 
